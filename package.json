@@ -14,9 +14,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "require-dir": "^1.2.0",
-    "spotify-web-api-node": "^5.0.2"
+    "spotify-web-api-node": "^5.0.2",
+    "nodemon": "^2.0.13"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
   }
 }
