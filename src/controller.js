@@ -7,24 +7,15 @@ spotifyApi.gran
 var tknSpotify;
 module.exports = {
   async spotify(req, res) {
-    let tokenTime; 
-    await spotifyApi.authorizationCodeGrant().then(data => {
-      tokenTime = data.body['expires_in'];
-    })
-    if(tokenTime<=0 && !tokenTime){
       await spotifyApi.clientCredentialsGrant().then(data => {
-        console.log('The access token expires in ' + data.body['expires_in']);
-        console.log('The access token is ' + data.body['access_token']);
-        // Save the access token so that it's used in future calls
         tknSpotify = data.body['access_token'];
       }) .catch(err => {
         console.log('Something went wrong when retrieving an access token', err);
       });
-    }
     
     spotifyApi.setAccessToken(tknSpotify);
     console.log("Server UP");
-    return res.json(tkn);
+    return res.json({messege: "Token generated"});
     },
 
   async show(req, res) {
@@ -40,7 +31,7 @@ module.exports = {
     );
     return res.json(artist);
   },
-  async showRelated(req, resp) {
+  async showRelated(req, res) {
     let artist;
     await spotifyApi.getArtistRelatedArtists(req.params.id).then(
       function (data) {
